@@ -83,3 +83,6 @@ desktop.ini
 /tmp/
 /out/
 .cache/
+
+# Archivos sensibles
+backend/sistema-importaciones.json
