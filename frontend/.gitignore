@@ -1,0 +1,85 @@
+# ============================================
+#  GLOBAL IGNORE CONFIG FOR SYSTEM-IMPORTS APP
+#  Stack: Angular + FastAPI + Firebase
+# ============================================
+
+# === FRONTEND (Angular) ===
+/dist
+/tmp
+/out-tsc
+/.angular/cache
+/bazel-out
+
+# Node dependencies
+/node_modules
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# === BACKEND (FastAPI / Python) ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+instance/
+.env
+.env.*
+.venv/
+env/
+venv/
+*.log
+
+# === FIREBASE & SECRETS ===
+firebase-debug.log
+firebase-debug.*
+firebase.json
+storage-debug.log
+
+# === ENVIRONMENT FILES ===
+.env
+.env.local
+.env.development
+.env.production
+.env.example  # <- Este sí puedes subir si no tiene claves reales
+
+# === IDEs and Editors ===
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.settings/
+.classpath
+.project
+.c9/
+
+# === VSCode Config (Opcionalmente permite settings del proyecto) ===
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# === Miscellaneous ===
+.sass-cache/
+.connect.lock
+/coverage
+/libpeerconnection.log
+testem.log
+/typings
+__screenshots__/
+.history/
+
+# === OS Specific ===
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Icon?
+desktop.ini
+
+# === Build & Temp ===
+/build/
+/logs/
+/tmp/
+/out/
+.cache/

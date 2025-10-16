@@ -1,0 +1,29 @@
+.dashboard-content {
+  margin-left: 220px;
+  padding: 20px;
+  width: 100%;
+  background-color: #f4f7fb;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Tarjetas arriba --- */
+.section-top {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* --- Gráficas debajo --- */
+.section-bottom {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Opcional: limita el ancho para centrar mejor el contenido */
+.section-top, .section-bottom {
+  max-width: 1000px;
+  margin: 0 auto;
+}

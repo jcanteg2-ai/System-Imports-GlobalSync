@@ -1,0 +1,84 @@
+<div class="container" [class.toggle]="showRegister">
+  <!-- Formulario de inicio de sesión -->
+  <div class="container-form">
+    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+      <img src="assets/img/image.png" alt="Logotipo principal" class="logo" />
+
+
+      <h2>Iniciar Sesión</h2>
+      <span>Ingrese con su correo y contraseña</span>
+
+      <div class="container-input">
+        <ion-icon name="mail"></ion-icon>
+        <input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+      </div>
+
+      <div class="container-input">
+        <ion-icon name="lock-closed"></ion-icon>
+        <input
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+      </div>
+
+      <button type="submit">Iniciar Sesión</button>
+      <a href="#">¿Olvidaste tu contraseña?</a>
+    </form>
+  </div>
+
+  <!-- Formulario de registro -->
+  <div class="container-form">
+    <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+        <img src="../assets/img/image.png" alt="Logotipo principal" class="logo" />
+
+      <h2>Regístrate</h2>
+      <span>Ingresa con tus datos personales</span>
+
+      <div class="container-input">
+        <ion-icon name="person"></ion-icon>
+        <input
+          type="text"
+          placeholder="Nombre"
+          [(ngModel)]="nombre"
+          name="nombre"
+          required
+        />
+      </div>
+
+      <div class="container-input">
+        <ion-icon name="mail"></ion-icon>
+        <input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="nuevoEmail"
+          name="nuevoEmail"
+          required
+        />
+      </div>
+
+      <div class="container-input">
+        <ion-icon name="lock-closed"></ion-icon>
+        <input
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="nuevoPassword"
+          name="nuevoPassword"
+          required
+        />
+      </div>
+
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+</div>
+
+<button id="btn" (click)="toggleForm()">Cambiar</button>
