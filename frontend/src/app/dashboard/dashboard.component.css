@@ -1,0 +1,19 @@
+.dashboard-container {
+  display: flex;
+}
+
+.main-content {
+  margin-left: 230px;
+  width: calc(100% - 230px);
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f6fa;
+  min-height: 100vh;
+}
+
+.content {
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}

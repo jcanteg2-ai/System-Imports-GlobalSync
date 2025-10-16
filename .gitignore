@@ -1,0 +1,103 @@
+# ===================================================
+# Archivos sensibles y secretos
+# ===================================================
+# Firebase key
+backend/firebase-key.json
+
+# Variables de entorno
+.env
+.env.*
+*.env
+
+# Credenciales de servicios externos
+*.pem
+*.key
+*.crt
+
+# ===================================================
+# Python / FastAPI
+# ===================================================
+# Caché de Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Archivos de base de datos locales
+*.sqlite3
+*.db
+*.db-journal
+
+# Carpeta de empaquetado y distribución
+*.egg-info/
+dist/
+build/
+*.egg
+*.whl
+
+# Logs
+*.log
+
+# Testing
+htmlcov/
+.coverage
+pytest_cache/
+.tox/
+
+# ===================================================
+# Node.js / Frontend
+# ===================================================
+# Dependencias
+node_modules/
+jspm_packages/
+
+# Logs de npm/yarn
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build / distribución
+dist/
+build/
+*.tsbuildinfo
+
+# ===================================================
+# IDEs y editores
+# ===================================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+
+# ===================================================
+# Sistemas operativos
+# ===================================================
+.DS_Store
+Thumbs.db
+
+# ===================================================
+# Otros archivos
+# ===================================================
+*.swp
+*.bak
+*.tmp
+*.orig
+
+# ===================================================
+# Coverage / Reports
+# ===================================================
+.coverage
+coverage/
+*.cover
+*.gcov
+*.lcov
+
+# ===================================================
+# Archivos comprimidos / paquetes
+# ===================================================
+*.zip
+*.tar.gz
+*.tar.bz2
+*.rar
+
