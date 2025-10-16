@@ -23,9 +23,9 @@ export class ChartsComponent implements AfterViewInit {
     new Chart(this.salesChart.nativeElement, {
       type: 'line',
       data: {
-        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Agos', 'Sep' ],
         datasets: [{
-          label: 'Ventas (millones)',
+          label: 'Ingresos (millones)',
           data: [5, 7, 9, 6, 10, 13],
           borderColor: '#3A86FF',
           backgroundColor: 'rgba(58,134,255,0.2)',

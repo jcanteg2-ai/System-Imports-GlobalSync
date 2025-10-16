@@ -1,19 +1,29 @@
-.dashboard-container {
-  display: flex;
-}
-
-.main-content {
-  margin-left: 230px;
-  width: calc(100% - 230px);
+.dashboard-content {
+  margin-left: 220px;
+  padding: 20px;
+  width: 100%;
+  background-color: #f4f7fb;
   display: flex;
   flex-direction: column;
-  background-color: #f5f6fa;
-  min-height: 100vh;
 }
 
-.content {
-  padding: 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+/* --- Tarjetas arriba --- */
+.section-top {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* --- Gráficas debajo --- */
+.section-bottom {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 20px;
+}
+
+/* Opcional: limita el ancho para centrar mejor el contenido */
+.section-top, .section-bottom {
+  max-width: 1000px;
+  margin: 0 auto;
 }
