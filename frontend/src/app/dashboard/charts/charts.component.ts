@@ -16,17 +16,17 @@ export class ChartsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.createSalesChart();
-    this.createCategoryChart();
+    this.createCategoryBarChart(); // ✅ Llamar correctamente al gráfico de barras
   }
 
   createSalesChart() {
     new Chart(this.salesChart.nativeElement, {
       type: 'line',
       data: {
-        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Agos', 'Sep' ],
+        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Agos', 'Sep', 'Oct', 'Nov', 'Dic'],
         datasets: [{
-          label: 'Ingresos (millones)',
-          data: [5, 7, 9, 6, 10, 13],
+          label: 'Ingresos (mil)',
+          data: [5, 7, 9, 6, 10, 13, 20, 50, 80, 90, 20, 50],
           borderColor: '#3A86FF',
           backgroundColor: 'rgba(58,134,255,0.2)',
           tension: 0.3,
@@ -43,20 +43,23 @@ export class ChartsComponent implements AfterViewInit {
     });
   }
 
-  createCategoryChart() {
+  createCategoryBarChart() {
     new Chart(this.categoryChart.nativeElement, {
-      type: 'doughnut',
+      type: 'bar',
       data: {
-        labels: ['Hamburguesas', 'Bebidas', 'Acompañamientos', 'Postres'],
+        labels: ['Centroamerica', 'Norteamerica', 'Europa', 'Asia'],
         datasets: [{
+          label: 'Volumen de expotaciones por region',
           data: [45, 25, 15, 15],
-          backgroundColor: ['#3A86FF', '#FFBE0B', '#FB5607', '#8338EC'],
-          hoverOffset: 10
+          backgroundColor: ['#3A86FF', '#FFBE0B', '#FB5607', '#8338EC']
         }]
       },
       options: {
         plugins: {
-          legend: { position: 'right' }
+          legend: { position: 'top' }
+        },
+        scales: {
+          y: { beginAtZero: true }
         }
       }
     });

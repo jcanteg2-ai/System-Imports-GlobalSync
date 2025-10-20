@@ -1,0 +1,258 @@
+/* === ESTILO GLOBAL === */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f4f7fa;
+  color: #333;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+/* === CONTENEDOR PRINCIPAL === */
+.shipments-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 25px;
+  padding: 30px;
+  text-align: center;
+}
+
+/* === BARRA SUPERIOR === */
+.topbar {
+  background: #0a2342;
+  color: white;
+  border-radius: 8px;
+  padding: 12px 25px;
+  width: 100%;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.topbar-left h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+/* === TÍTULO PRINCIPAL === */
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #0066ff;
+  margin-bottom: 10px;
+}
+
+/* === TARJETAS === */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 1000px;
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+/* === FORMULARIO === */
+.form-card h3 {
+  color: #0066ff;
+  margin-bottom: 15px;
+  font-weight: 600;
+  text-align: left;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 0.95rem;
+}
+
+input:focus, select:focus {
+  border-color: #0066ff;
+  box-shadow: 0 0 5px rgba(0, 102, 255, 0.3);
+  outline: none;
+}
+
+/* === BOTONES === */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.button-group button {
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 30%;
+}
+
+.btn-primary {
+  background: #0066ff;
+  color: white;
+}
+.btn-primary:hover { background: #004fc6; }
+
+.btn-secondary {
+  background: #00b8d9;
+  color: white;
+}
+.btn-secondary:hover { background: #009bb3; }
+
+.btn-cancel {
+  background: #6c757d;
+  color: white;
+}
+.btn-cancel:hover { background: #5a6268; }
+
+/* === QR CODE === */
+.qr-card {
+  text-align: center;
+  background: #f8f9fa;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.qr-card qrcode {
+  display: block;
+  margin: 10px auto;
+}
+.qr-title {
+  color: #0066ff;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* === TABLA === */
+.table-card h3 {
+  color: #0066ff;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.filters label {
+  font-weight: 500;
+  color: #555;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th {
+  background: #0066ff;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+td {
+  text-align: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+tr:hover { background: #f6f9ff; }
+
+/* === ESTADOS === */
+.status {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: #000;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+.recibido { background: #ffc107; }
+.en-transito { background: #007bff; color: #fff; }
+.entregado { background: #28a745; color: #fff; }
+.cerrado { background: #6c757d; color: #fff; }
+
+/* === LOADER === */
+.loader-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+}
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #0066ff;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 992px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+

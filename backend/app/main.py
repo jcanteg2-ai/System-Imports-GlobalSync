@@ -17,7 +17,7 @@ app = FastAPI(title="Prueba Rápida – FastAPI + Firebase RTDB")
 # --- CORS (para que Angular en 4200 pueda llamar a la API) ---
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=CORS_ORIGINS,
+    allow_origins=["http://localhost:4200", "http://127.0.0.1:4200"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -42,6 +42,11 @@ try:
 except Exception as e:
     # No detengo el servidor para que puedas ver /healthz y diagnosticar
     print(f"[WARN] Firebase no inicializado: {e}")
+
+from app.routers import shipments  # 👈 importa tu archivo de rutas
+
+app.include_router(shipments.router)  # 👈 registra el router
+
 
 # ------------------ Rutas de prueba ------------------
 
@@ -86,3 +91,4 @@ def dev_read(key: str = Query("ping")):
         return {"ok": True, "key": key, "data": data}
     except Exception as e:
         raise HTTPException(500, f"Error leyendo de RTDB: {e}")
+

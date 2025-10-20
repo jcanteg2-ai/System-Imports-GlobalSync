@@ -1,0 +1,137 @@
+<!-- 🔹 BARRA SUPERIOR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <h2>System Imports</h2>
+  </div>
+  <div class="topbar-right">
+    <img src="assets/img/ima.png" alt="Logo" class="user-logo" />
+    <span>Administrador</span>
+  </div>
+</div>
+
+<!-- 🔹 CONTENIDO PRINCIPAL -->
+<div class="shipments-container">
+  <h2 class="page-title">Gestión de Envíos</h2>
+
+  <div class="content-grid">
+    <!-- 🧾 FORMULARIO DE REGISTRO -->
+    <div class="card form-card">
+      <div *ngIf="loading" class="loader-overlay">
+        <div class="spinner"></div>
+        <p>Procesando envío...</p>
+      </div>
+
+      <h3>Registrar / Actualizar Envío</h3>
+
+      <form (ngSubmit)="registerShipment()" #formEnvios="ngForm" class="shipment-form" @fadeIn>
+        <div class="form-grid">
+          <input type="text" placeholder="Cliente" [(ngModel)]="shipment.client" name="client" required />
+
+          <select [(ngModel)]="shipment.type" name="type" required>
+            <option value="">Seleccione tipo</option>
+            <option value="Importación">Importación</option>
+            <option value="Exportación">Exportación</option>
+          </select>
+
+          <input type="number" placeholder="Peso (kg)" [(ngModel)]="shipment.weight" name="weight" (input)="calculateCost()" required />
+
+          <input type="text" placeholder="Dimensiones (cm)" [(ngModel)]="shipment.dimensions" name="dimensions" required />
+
+          <input type="text" placeholder="Destino" [(ngModel)]="shipment.destination" name="destination" (input)="calculateCost()" required />
+
+          <input type="text" placeholder="Descripción" [(ngModel)]="shipment.description" name="description" />
+
+          <input type="number" placeholder="Costo (Q)" [(ngModel)]="shipment.cost" name="cost" readonly />
+
+          <select [(ngModel)]="shipment.status" name="status" required>
+            <option value="Recibido">Recibido</option>
+            <option value="En tránsito">En tránsito</option>
+            <option value="Entregado">Entregado</option>
+            <option value="Cerrado">Cerrado</option>
+          </select>
+        </div>
+
+        <div class="button-group">
+          <button type="submit" class="btn-primary">Registrar</button>
+          <button type="button" (click)="updateShipment()" class="btn-secondary">Actualizar</button>
+          <button type="button" (click)="clearForm()" class="btn-cancel">Cancelar</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 🔹 CÓDIGO QR -->
+    <div class="card qr-card" *ngIf="qrData" @fadeIn>
+      <h3 class="qr-title">Código QR del Envío</h3>
+      <qrcode
+        [qrdata]="qrData"
+        [width]="200"
+        [errorCorrectionLevel]="'M'">
+      </qrcode>
+      <p><strong>Número de guía:</strong> {{ qrData }}</p>
+    </div>
+  </div>
+
+  <!-- 📋 LISTADO DE ENVÍOS -->
+  <div class="card table-card" @fadeIn>
+    <h3>Listado de Envíos</h3>
+
+    <div class="filters">
+      <label>Estado:</label>
+      <select [(ngModel)]="filterStatus">
+        <option value="">Todos</option>
+        <option value="Recibido">Recibido</option>
+        <option value="En tránsito">En tránsito</option>
+        <option value="Entregado">Entregado</option>
+        <option value="Cerrado">Cerrado</option>
+      </select>
+
+      <label>Fecha inicio:</label>
+      <input type="date" [(ngModel)]="startDate" name="startDate" />
+
+      <label>Fecha fin:</label>
+      <input type="date" [(ngModel)]="endDate" name="endDate" />
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>N° Guía</th>
+          <th>Cliente</th>
+          <th>Tipo</th>
+          <th>Peso</th>
+          <th>Destino</th>
+          <th>Estado</th>
+          <th>Costo (Q)</th>
+          <th>Fecha</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of filterByStatus()">
+          <td>{{ s.tracking_number }}</td>
+          <td>{{ s.client }}</td>
+          <td>{{ s.type }}</td>
+          <td>{{ s.weight }}</td>
+          <td>{{ s.destination }}</td>
+          <td>
+            <span class="status"
+              [ngClass]="{
+                'recibido': s.status === 'Recibido',
+                'en-transito': s.status === 'En tránsito',
+                'entregado': s.status === 'Entregado',
+                'cerrado': s.status === 'Cerrado'
+              }">
+              {{ s.status }}
+            </span>
+          </td>
+          <td>{{ s.cost | currency: 'GTQ' }}</td>
+          <td>{{ s.created_at | date: 'short' }}</td>
+          <td>
+            <button (click)="editShipment(s)">✏️</button>
+            <button (click)="cancelShipment(s.id)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

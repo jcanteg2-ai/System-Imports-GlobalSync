@@ -1,0 +1,72 @@
+/* --- Layout general --- */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f5f8fb;
+}
+
+/* --- Header --- */
+.public-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 10px 30px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* 🔹 Imagen redonda */
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.header-right .btn-login {
+  background-color: #003366;
+  color: white;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.header-right .btn-login:hover {
+  background-color: #0055aa;
+}
+
+/* --- Main content --- */
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.hero h2 {
+  color: #003366;
+  font-size: 26px;
+}
+
+.hero p {
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* --- Footer --- */
+footer {
+  background: #003366;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  margin-top: 40px;
+}

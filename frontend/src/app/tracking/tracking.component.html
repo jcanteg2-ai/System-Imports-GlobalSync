@@ -1,0 +1,44 @@
+<div class="tracking-container">
+  <h3>Rastrea tu paquete</h3>
+
+  <div class="tracking-form">
+    <input
+      type="text"
+      [(ngModel)]="trackingNumber"
+      placeholder="Ingrese número de guía"
+      (keyup.enter)="searchShipment()"
+    />
+    <button (click)="searchShipment()">🔍 Buscar</button>
+  </div>
+
+  <!-- Resultado del rastreo -->
+  <div *ngIf="shipment" class="result-card">
+    <h4>Número de guía: {{ shipment.guide }}</h4>
+    <p><strong>Estado actual:</strong> {{ shipment.currentStatus }}</p>
+    <p><strong>Entrega estimada:</strong> {{ shipment.estimatedDelivery }}</p>
+
+    <div *ngIf="isLoggedIn; else publicView">
+      <h4>📜 Historial completo</h4>
+      <ul>
+        <li *ngFor="let event of shipment.history">
+          <strong>{{ event.date }}:</strong> {{ event.event }}
+        </li>
+      </ul>
+    </div>
+
+    <ng-template #publicView>
+      <p class="locked-message">
+        🔒 Inicia sesión o crea una cuenta para ver el historial completo y recibir notificaciones.
+      </p>
+      <div class="auth-buttons">
+        <button class="login-btn" (click)="redirectToLogin()">Iniciar sesión</button>
+        <button class="register-btn" (click)="redirectToRegister()">Registrarse</button>
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Mensaje si no existe -->
+  <div *ngIf="message" class="error-message">
+    {{ message }}
+  </div>
+</div>

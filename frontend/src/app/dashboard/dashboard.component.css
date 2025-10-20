@@ -27,3 +27,70 @@
   max-width: 1000px;
   margin: 0 auto;
 }
+
+.actions {
+  text-align: right;
+  margin: 20px 40px 30px 0;
+}
+
+.actions button {
+  background-color: #0d6efd;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.actions button:hover {
+  background-color: #084298;
+  transform: scale(1.03);
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 25px;
+  background: #f9fafc;
+  border-bottom: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.header-left h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-right select {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-weight: 500;
+}
+
+.btn-pdf {
+  background-color: #003366;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-pdf:hover {
+  background-color: #0055aa;
+}

@@ -40,3 +40,20 @@
   height: 35px;
   border-radius: 50%;
 }
+
+.search-input {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 160px;
+  font-size: 14px;
+}
+
+.navbar-right img {
+  border-radius: 50%;        /* 🔹 Hace la imagen redonda */
+  width: 40px;               /* Ajusta el tamaño */
+  height: 40px;
+  object-fit: cover;         /* Mantiene la proporción de la imagen */
+  border: 2px solid #ddd;    /* Opcional: borde sutil */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Opcional: sombra suave */
+}
