@@ -1,67 +1,88 @@
-import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
+import { Component, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { NgApexchartsModule, ChartComponent } from 'ng-apexcharts';
+import {
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexDataLabels,
+  ApexStroke,
+  ApexTitleSubtitle,
+  ApexGrid
+} from 'ng-apexcharts';
 
-Chart.register(...registerables);
+export type ChartOptions = {
+  series: ApexAxisChartSeries;
+  chart: ApexChart;
+  xaxis: ApexXAxis;
+  dataLabels: ApexDataLabels;
+  stroke: ApexStroke;
+  title: ApexTitleSubtitle;
+  grid: ApexGrid;
+};
 
 @Component({
   selector: 'app-charts',
   standalone: true,
+  imports: [CommonModule, NgApexchartsModule],
   templateUrl: './charts.component.html',
   styleUrls: ['./charts.component.css']
 })
-export class ChartsComponent implements AfterViewInit {
+export class ChartsComponent {
+  @ViewChild('chart') chart!: ChartComponent;
 
-  @ViewChild('salesChart') salesChart!: ElementRef;
-  @ViewChild('categoryChart') categoryChart!: ElementRef;
-
-  ngAfterViewInit() {
-    this.createSalesChart();
-    this.createCategoryBarChart(); // ✅ Llamar correctamente al gráfico de barras
-  }
-
-  createSalesChart() {
-    new Chart(this.salesChart.nativeElement, {
+  // 📈 Gráfica de ingresos mensuales
+  public lineChartOptions: ChartOptions = {
+    series: [
+      {
+        name: 'Ingresos (USD)',
+        data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+      }
+    ],
+    chart: {
+      height: 350,
       type: 'line',
-      data: {
-        labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Agos', 'Sep', 'Oct', 'Nov', 'Dic'],
-        datasets: [{
-          label: 'Ingresos (mil)',
-          data: [5, 7, 9, 6, 10, 13, 20, 50, 80, 90, 20, 50],
-          borderColor: '#3A86FF',
-          backgroundColor: 'rgba(58,134,255,0.2)',
-          tension: 0.3,
-          fill: true
-        }]
-      },
-      options: {
-        plugins: { legend: { display: true, position: 'bottom' } },
-        scales: {
-          y: { beginAtZero: true },
-          x: { grid: { display: false } }
-        }
-      }
-    });
-  }
+      toolbar: { show: true }
+    },
+    dataLabels: { enabled: false },
+    stroke: { curve: 'smooth' },
+    title: {
+      text: 'Ingresos mensuales',
+      align: 'left'
+    },
+    grid: {
+      row: { colors: ['#f3f3f3', 'transparent'], opacity: 0.5 }
+    },
+    xaxis: {
+      categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep']
+    }
+  };
 
-  createCategoryBarChart() {
-    new Chart(this.categoryChart.nativeElement, {
-      type: 'bar',
-      data: {
-        labels: ['Centroamerica', 'Norteamerica', 'Europa', 'Asia'],
-        datasets: [{
-          label: 'Volumen de expotaciones por region',
-          data: [45, 25, 15, 15],
-          backgroundColor: ['#3A86FF', '#FFBE0B', '#FB5607', '#8338EC']
-        }]
-      },
-      options: {
-        plugins: {
-          legend: { position: 'top' }
-        },
-        scales: {
-          y: { beginAtZero: true }
-        }
+  // 📊 Gráfica de categorías por región
+  public barChartOptions: ChartOptions = {
+    series: [
+      {
+        name: 'Volumen de exportaciones por región',
+        data: [45, 25, 15, 15]
       }
-    });
-  }
+    ],
+    chart: {
+      height: 350,
+      type: 'bar',
+      toolbar: { show: false }
+    },
+    dataLabels: { enabled: true },
+    stroke: { curve: 'straight' },
+    title: {
+      text: 'Categorías',
+      align: 'left'
+    },
+    grid: {
+      row: { colors: ['#f9f9f9', 'transparent'], opacity: 0.5 }
+    },
+    xaxis: {
+      categories: ['Centroamérica', 'Norteamérica', 'Europa', 'Asia']
+    }
+  };
 }
+

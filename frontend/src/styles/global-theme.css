@@ -1,0 +1,193 @@
+/* ============================================================
+   🌐 GlobalSync - Tema Corporativo Global
+   ============================================================ */
+
+/* === VARIABLES DE COLOR === */
+:root {
+  --primary-color: #002b5c;      /* Azul corporativo principal */
+  --secondary-color: #0058e0;    /* Azul claro para hover y acento */
+  --accent-color: #00bcd4;       /* Azul turquesa opcional */
+  --danger-color: #d9534f;       /* Rojo para eliminar o errores */
+  --success-color: #28a745;      /* Verde para confirmaciones */
+  --light-bg: #f4f7fa;           /* Fondo gris suave */
+  --text-color: #333;            /* Texto general */
+  --card-bg: #ffffff;            /* Fondo de tarjetas y formularios */
+  --border-radius: 10px;         /* Curvatura general */
+  --shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* === BASE GLOBAL === */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--light-bg);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+/* === UTILIDADES === */
+.container-center {
+  width: 90%;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 25px;
+}
+
+/* === BOTONES === */
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background: var(--secondary-color);
+  transform: scale(1.03);
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+.btn-danger {
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.btn-danger:hover {
+  background: #c9302c;
+  transform: scale(1.03);
+}
+
+.btn-success {
+  background: var(--success-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+.btn-success:hover {
+  background: #218838;
+  transform: scale(1.03);
+}
+
+/* === NAVBAR === */
+.navbar {
+  background: var(--card-bg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  padding: 15px 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar-content {
+  width: 85%;
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-logo {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.navbar-title {
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+
+.btn-login {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-login:hover {
+  background: var(--secondary-color);
+  transform: scale(1.03);
+}
+
+/* === FOOTER === */
+.footer {
+  background: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 0.9rem;
+  margin-top: 40px;
+}
+
+/* === FORMULARIOS === */
+label {
+  font-weight: 600;
+  color: var(--primary-color);
+  display: block;
+  margin-bottom: 4px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1.5px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--secondary-color);
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 88, 224, 0.25);
+}
+
+/* === ENCABEZADOS === */
+.page-title {
+  color: var(--primary-color);
+  font-weight: 700;
+  font-size: 1.9rem;
+  margin-bottom: 20px;
+  text-align: center;
+}

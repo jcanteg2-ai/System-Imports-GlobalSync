@@ -1,12 +1,16 @@
-<div class="dashboard-container">
+<!-- Navbar -->
+<app-navbar></app-navbar>
+
+<div class="dashboard-layout">
+  <!-- Sidebar -->
   <app-sidebar></app-sidebar>
 
-  <div class="main-content">
-    <app-navbar></app-navbar>
+  <!-- Contenido principal -->
+  <div class="dashboard-main">
+    <!-- Tarjetas -->
+    <app-cards></app-cards>
 
-    <div class="content">
-      <app-cards></app-cards>
-      <app-charts></app-charts>
-    </div>
+    <!-- Gráficas -->
+    <app-charts></app-charts>
   </div>
 </div>

@@ -1,26 +1,26 @@
 import { Routes } from '@angular/router';
-import { PublicPageComponent } from './public/public-page/public-page.component';  // ✅ ruta corregida
+import { PublicPageComponent } from './public/public-page/public-page.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ShipmentsComponent } from './shipments/shipments.component';
 
 export const appRoutes: Routes = [
-  // 🏠 Página principal pública (rastreo sin login)
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  // 🌍 Página pública (rastreo)
   { path: 'home', component: PublicPageComponent },
 
   // 🔐 Inicio de sesión
   { path: 'login', component: LoginComponent },
 
-  // 📊 Dashboard privado (solo después de login)
+  // 📦 Gestión de envíos
+  { path: 'shipments', component: ShipmentsComponent },
+
+  // 📊 Dashboard principal
   { path: 'dashboard', component: DashboardComponent },
-
   
-  {path: 'shipments', component: ShipmentsComponent },
 
+  // 🏠 Ruta raíz redirige a home
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 
-  // 🚫 Cualquier ruta no existente redirige al home
+  // 🚫 Ruta por defecto para no encontradas
   { path: '**', redirectTo: 'home' }
-
-  ];
-
+];

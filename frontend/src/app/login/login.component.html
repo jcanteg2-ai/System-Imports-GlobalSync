@@ -1,84 +1,111 @@
-<div class="container" [class.toggle]="showRegister">
-  <!-- Formulario de inicio de sesión -->
-  <div class="container-form">
-    <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-      <img src="assets/img/image.png" alt="Logotipo principal" class="logo" />
-
+<div class="auth-container" [class.toggle]="showRegister">
+  <!-- ==== PANEL IZQUIERDO (LOGIN) ==== -->
+  <div class="auth-card sign-in-form">
+    <div class="auth-content">
+      <img src="assets/img/image.png" alt="GlobalSync Logo" class="auth-logo" />
 
       <h2>Iniciar Sesión</h2>
-      <span>Ingrese con su correo y contraseña</span>
+      <p>Bienvenido de nuevo a <strong>GlobalSync</strong></p>
 
-      <div class="container-input">
-        <ion-icon name="mail"></ion-icon>
-        <input
-          type="email"
-          placeholder="Email"
-          [(ngModel)]="email"
-          name="email"
-          required
-        />
-      </div>
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm" novalidate>
+        <div class="auth-field">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input
+            type="email"
+            placeholder="Correo electrónico"
+            [(ngModel)]="email"
+            name="email"
+            required
+          />
+        </div>
 
-      <div class="container-input">
-        <ion-icon name="lock-closed"></ion-icon>
-        <input
-          type="password"
-          placeholder="Password"
-          [(ngModel)]="password"
-          name="password"
-          required
-        />
-      </div>
+        <div class="auth-field">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+        </div>
 
-      <button type="submit">Iniciar Sesión</button>
-      <a href="#">¿Olvidaste tu contraseña?</a>
-    </form>
+        <button type="submit" class="btn-primary">Iniciar sesión</button>
+      </form>
+
+      <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+
+      <p class="switch-text">
+        ¿No tienes una cuenta?
+        <a href="#" (click)="toggleForm()">Regístrate aquí</a>
+      </p>
+    </div>
   </div>
 
-  <!-- Formulario de registro -->
-  <div class="container-form">
-    <form (ngSubmit)="onRegister()" #registerForm="ngForm">
-        <img src="../assets/img/image.png" alt="Logotipo principal" class="logo" />
+  <!-- ==== PANEL DERECHO (REGISTRO) ==== -->
+  <div class="auth-card sign-up-form">
+    <div class="auth-content">
+      <img src="assets/img/image.png" alt="GlobalSync Logo" class="auth-logo" />
 
-      <h2>Regístrate</h2>
-      <span>Ingresa con tus datos personales</span>
+      <h2>Crear Cuenta</h2>
+      <p>Ingresa tus datos para unirte a <strong>GlobalSync</strong></p>
 
-      <div class="container-input">
-        <ion-icon name="person"></ion-icon>
-        <input
-          type="text"
-          placeholder="Nombre"
-          [(ngModel)]="nombre"
-          name="nombre"
-          required
-        />
-      </div>
+      <form (ngSubmit)="onRegister()" #registerForm="ngForm" novalidate>
+        <div class="auth-field">
+          <ion-icon name="person-outline"></ion-icon>
+          <input
+            type="text"
+            placeholder="Nombre completo"
+            [(ngModel)]="nombre"
+            name="nombre"
+            required
+          />
+        </div>
 
-      <div class="container-input">
-        <ion-icon name="mail"></ion-icon>
-        <input
-          type="email"
-          placeholder="Email"
-          [(ngModel)]="nuevoEmail"
-          name="nuevoEmail"
-          required
-        />
-      </div>
+        <div class="auth-field">
+          <ion-icon name="mail-outline"></ion-icon>
+          <input
+            type="email"
+            placeholder="Correo electrónico"
+            [(ngModel)]="nuevoEmail"
+            name="nuevoEmail"
+            required
+          />
+        </div>
 
-      <div class="container-input">
-        <ion-icon name="lock-closed"></ion-icon>
-        <input
-          type="password"
-          placeholder="Password"
-          [(ngModel)]="nuevoPassword"
-          name="nuevoPassword"
-          required
-        />
-      </div>
+        <div class="auth-field">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input
+            type="password"
+            placeholder="Contraseña"
+            [(ngModel)]="nuevoPassword"
+            name="nuevoPassword"
+            required
+          />
+        </div>
 
-      <button type="submit">Registrar</button>
-    </form>
+        <button type="submit" class="btn-primary">Registrar</button>
+      </form>
+
+      <p class="switch-text">
+        ¿Ya tienes una cuenta?
+        <a href="#" (click)="toggleForm()">Inicia sesión</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ==== PANEL AZUL DE BIENVENIDA ==== -->
+  <div class="auth-panel">
+    <div class="panel-content" *ngIf="!showRegister">
+      <h3>¿Nuevo en GlobalSync?</h3>
+      <p>Regístrate para gestionar tus importaciones y exportaciones fácilmente.</p>
+      <button (click)="toggleForm()" class="btn-secondary">Crear cuenta</button>
+    </div>
+
+    <div class="panel-content" *ngIf="showRegister">
+      <h3>¡Bienvenido de vuelta!</h3>
+      <p>Si ya tienes una cuenta, inicia sesión para continuar.</p>
+      <button (click)="toggleForm()" class="btn-secondary">Iniciar sesión</button>
+    </div>
   </div>
 </div>
-
-<button id="btn" (click)="toggleForm()">Cambiar</button>

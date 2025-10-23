@@ -1,13 +1,27 @@
-<aside class="sidebar">
-  <div class="logo">
-    <img src="../assets/img/image.png" alt="Logo" />
-  </div>
+<div class="sidebar">
+  <img src="assets/img/image.png" alt="Logo" class="sidebar-logo" />
+  <h2 class="sidebar-title">System Imports</h2>
 
-  <ul class="menu">
-    <li><i class="fas fa-tachometer-alt"></i> Dashboard</li>
-    <li><i class="fas fa-boxes"></i> Facturacion</li>
-    <li><i class="fas fa-users"></i>Rastreo</li>
-    <li><i class="fas fa-chart-line"></i>Gestion de envios</li>
-    <li><i class="fas fa-cog"></i> Gestion de usuarios</li>
-  </ul>
-</aside>
+  <nav class="sidebar-menu">
+    <a routerLink="/dashboard">
+      <i class="fa-solid fa-chart-column"></i>
+      <span>Dashboard</span>
+    </a>
+    <a routerLink="/invoices">
+      <i class="fa-solid fa-money-bill-wave"></i>
+      <span>Facturación</span>
+    </a>
+    <a routerLink="/tracking">
+      <i class="fa-solid fa-box"></i>
+      <span>Rastreo</span>
+    </a>
+    <a routerLink="/shipments">
+      <i class="fa-solid fa-truck"></i>
+      <span>Gestión de envíos</span>
+    </a>
+    <a routerLink="/users">
+      <i class="fa-solid fa-users"></i>
+      <span>Gestión de usuarios</span>
+    </a>
+  </nav>
+</div>

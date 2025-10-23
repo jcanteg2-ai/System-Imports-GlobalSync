@@ -1,11 +1,29 @@
 <div class="charts-container">
+  <!-- 📈 Gráfica de Ingresos Mensuales -->
   <div class="chart-card">
-    <h3>Ingresos Mensuales</h3>
-    <canvas #salesChart></canvas>
+    <h3>Ingresos mensuales</h3>
+    <apx-chart
+      [series]="lineChartOptions.series"
+      [chart]="lineChartOptions.chart"
+      [xaxis]="lineChartOptions.xaxis"
+      [dataLabels]="lineChartOptions.dataLabels"
+      [stroke]="lineChartOptions.stroke"
+      [title]="lineChartOptions.title"
+      [grid]="lineChartOptions.grid">
+    </apx-chart>
   </div>
 
+  <!-- 📊 Gráfica de Categorías -->
   <div class="chart-card">
     <h3>Categorías</h3>
-    <canvas #categoryChart></canvas>
+    <apx-chart
+      [series]="barChartOptions.series"
+      [chart]="barChartOptions.chart"
+      [xaxis]="barChartOptions.xaxis"
+      [dataLabels]="barChartOptions.dataLabels"
+      [stroke]="barChartOptions.stroke"
+      [title]="barChartOptions.title"
+      [grid]="barChartOptions.grid">
+    </apx-chart>
   </div>
 </div>

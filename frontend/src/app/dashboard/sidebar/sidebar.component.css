@@ -1,40 +1,61 @@
 .sidebar {
-  width: 230px;
+  width: 250px;
+  background-color: #3b82f6;
   height: 100vh;
-  background-color: #3a86ff;
-  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
-  position: fixed;
-  left: 0;
-  top: 0;
+  justify-content: center; /* 💥 centrado vertical */
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 0 10px;
 }
 
-.logo img {
-  width: 90px;
-  height: 90px;
+.sidebar-logo {
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
-  margin-bottom: 30px;
+  object-fit: contain;
+  background-color: white;
+  padding: 6px;
+  margin-bottom: 10px;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
-.menu {
-  list-style: none;
+.sidebar-title {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.4;
+  margin-bottom: 25px;
+}
+
+.sidebar-menu {
   width: 100%;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-left: 25px;
 }
 
-.menu li {
-  padding: 15px 20px;
+.sidebar-menu a {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  gap: 12px;
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: 0.3s ease;
 }
 
-.menu li:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+.sidebar-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 8px;
+  transform: translateX(5px);
+}
+
+.sidebar-menu i {
+  font-size: 1.2rem;
 }

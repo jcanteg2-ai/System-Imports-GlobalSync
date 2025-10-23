@@ -1,28 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { QRCodeModule } from 'angularx-qrcode';
-import { trigger, transition, style, animate } from '@angular/animations';
+import { QRCodeComponent } from 'angularx-qrcode';
 import { ShipmentsService, Shipment } from './shipments.service';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-shipments',
   standalone: true,
-  imports: [CommonModule, FormsModule, QRCodeModule],
+  imports: [CommonModule, FormsModule, QRCodeComponent],
   templateUrl: './shipments.component.html',
-  styleUrls: ['./shipments.component.css'],
-  animations: [
-    trigger('fadeIn', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateY(10px)' }),
-        animate('400ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-      ])
-    ])
-  ]
+  styleUrls: ['./shipments.component.css']
 })
-export class ShipmentsComponent implements OnInit {
-
-  shipments: Shipment[] = [];
+export class ShipmentsComponent {
   shipment: Shipment = {
     client: '',
     type: '',
@@ -31,146 +22,90 @@ export class ShipmentsComponent implements OnInit {
     destination: '',
     description: '',
     cost: 0,
-    status: 'Recibido'
+    status: 'Recibido',
+    receiver_name: '',
+    receiver_phone: '',
+    receiver_email: '',
+    receiver_address: ''
   };
 
-  filterStatus = '';
-  startDate?: string;
-  endDate?: string;
-  loading = false; // Loader visual
-  qrData: string | null = null;
+  qrVisible = false;
+  generatedGuide = '';
+  savedShipment?: Shipment;
 
-  constructor(private shipmentsService: ShipmentsService) {}
+  constructor(private shipmentService: ShipmentsService) {}
 
-  ngOnInit(): void {
-    this.loadShipments();
-  }
-
-  // 🔄 Cargar envíos
-  loadShipments() {
-    this.loading = true;
-    this.shipmentsService.getShipments().subscribe({
-      next: (data) => {
-        this.shipments = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('❌ Error al cargar envíos:', err);
-        this.loading = false;
-      }
-    });
-  }
-
-  // 💰 Calcular costo
-  calculateCost() {
-    let rate = 0;
-    switch (this.shipment.destination.toLowerCase()) {
-      case 'guatemala': rate = 25; break;
-      case 'mexico':
-      case 'méxico': rate = 30; break;
-      case 'usa':
-      case 'eeuu':
-      case 'estados unidos': rate = 50; break;
-      default: rate = 40;
-    }
-    this.shipment.cost = this.shipment.weight * rate;
-  }
-
-  // 🧾 Registrar envío
   registerShipment() {
-    this.loading = true;
-
-    this.shipmentsService.createShipment(this.shipment).subscribe({
-      next: (res: any) => {
-        console.log('📦 Respuesta del backend:', res);
-
-        // ✅ Obtener número de guía correctamente
-        const tracking = res?.tracking_number || res?.data?.tracking_number || null;
-
-        this.loading = false; // 🔹 Siempre apagar loader
-
-        if (tracking) {
-          this.qrData = tracking; // ✅ Generar QR correctamente
-          alert(`✅ Envío registrado correctamente\nNúmero de guía: ${tracking}`);
-          this.clearForm();
-          this.loadShipments();
-        } else {
-          alert('⚠️ Envío creado, pero no se recibió número de guía.');
-        }
+    this.shipmentService.createShipment(this.shipment).subscribe({
+      next: (res) => {
+        this.savedShipment = res;
+        this.generatedGuide = res.tracking_number ?? '';
+        this.qrVisible = true;
       },
-      error: (err) => {
-        console.error('❌ Error al registrar envío:', err);
-        this.loading = false;
-        alert('❌ No se pudo registrar el envío.');
-      }
+      error: (err) => console.error('Error al crear envío:', err)
     });
   }
 
-  // ✏️ Editar envío
-  editShipment(shipment: Shipment) {
-    this.shipment = { ...shipment };
-    this.qrData = shipment.tracking_number ?? null;
-  }
-
-  // 💾 Actualizar envío
-  updateShipment() {
-    if (!this.shipment.id) {
-      alert('⚠️ Selecciona un envío para actualizar');
+  async downloadPDF() {
+    const content = document.getElementById('pdf-content');
+    if (!content) {
+      console.error('No se encontró el contenedor del PDF.');
       return;
     }
 
-    this.loading = true;
-    this.shipmentsService.updateShipment(this.shipment.id, this.shipment).subscribe({
-      next: () => {
-        alert('✅ Envío actualizado correctamente');
-        this.clearForm();
-        this.loadShipments();
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Error al actualizar envío:', err);
-        this.loading = false;
-      }
-    });
-  }
+    // Esperar a que el QR se renderice bien antes de capturarlo
+    await new Promise((resolve) => setTimeout(resolve, 600));
 
-  // 🗑️ Eliminar envío
-  cancelShipment(id: string | undefined) {
-    if (!id) return;
-    if (!confirm('¿Deseas eliminar este envío?')) return;
+    const canvas = await html2canvas(content, { scale: 3, useCORS: true });
+    const imgData = canvas.toDataURL('image/png');
 
-    this.loading = true;
-    this.shipmentsService.deleteShipment(id).subscribe({
-      next: () => {
-        alert('🗑️ Envío eliminado correctamente');
-        this.loadShipments();
-        this.loading = false;
-      },
-      error: (err) => {
-        console.error('Error al eliminar envío:', err);
-        this.loading = false;
-      }
-    });
-  }
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const margin = 15;
 
-  // 🧹 Limpiar formulario
-  clearForm() {
-    this.shipment = {
-      client: '',
-      type: '',
-      weight: 0,
-      dimensions: '',
-      destination: '',
-      description: '',
-      cost: 0,
-      status: 'Recibido'
-    };
-    // No borramos el QR para que se pueda escanear después
-  }
+    // 🧭 Encabezado
+    pdf.setFont('helvetica', 'bold');
+    pdf.setFontSize(18);
+    pdf.setTextColor(0, 43, 92);
+    pdf.text('GlobalSync - Guía de Envío', margin, 20);
+    pdf.setDrawColor(0, 43, 92);
+    pdf.setLineWidth(0.8);
+    pdf.line(margin, 25, pageWidth - margin, 25);
 
-  // 🔍 Filtrar por estado
-  filterByStatus() {
-    if (!this.filterStatus) return this.shipments;
-    return this.shipments.filter((s) => s.status === this.filterStatus);
+    // 📦 Imagen principal
+    const imgWidth = pageWidth - margin * 2;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    pdf.addImage(imgData, 'PNG', margin, 30, imgWidth, imgHeight);
+
+    // 🧾 Datos del destinatario (espaciado adecuado)
+    if (this.savedShipment) {
+      let y = 30 + imgHeight + 15;
+      pdf.setFont('helvetica', 'bold');
+      pdf.setFontSize(14);
+      pdf.setTextColor(0, 43, 92);
+      pdf.text('Datos del Destinatario', margin, y);
+
+      pdf.setFont('helvetica', 'normal');
+      pdf.setFontSize(11);
+      pdf.setTextColor(50);
+      y += 8;
+      pdf.text(`Nombre: ${this.savedShipment.receiver_name || 'N/A'}`, margin, y);
+      y += 6;
+      pdf.text(`Teléfono: ${this.savedShipment.receiver_phone || 'N/A'}`, margin, y);
+      y += 6;
+      pdf.text(`Correo: ${this.savedShipment.receiver_email || 'N/A'}`, margin, y);
+      y += 6;
+      pdf.text(`Dirección: ${this.savedShipment.receiver_address || 'N/A'}`, margin, y);
+    }
+
+    // 🦶 Pie de página
+    pdf.setFontSize(10);
+    pdf.setTextColor(100);
+    pdf.text(`Código de guía: ${this.generatedGuide}`, margin, pageHeight - 20);
+    pdf.text('© 2025 GlobalSync - Sistema de Importaciones y Exportaciones', margin, pageHeight - 15);
+
+    // 💾 Descargar PDF
+    pdf.save(`Guia_${this.generatedGuide}.pdf`);
   }
 }

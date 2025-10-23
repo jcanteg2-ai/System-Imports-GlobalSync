@@ -1,258 +1,304 @@
-/* === ESTILO GLOBAL === */
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Poppins', sans-serif;
+/* === GENERAL === */
+body {
   background: #f4f7fa;
-  color: #333;
-  height: 100%;
-  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
 }
 
-/* === CONTENEDOR PRINCIPAL === */
-.shipments-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 25px;
-  padding: 30px;
-  text-align: center;
-}
-
-/* === BARRA SUPERIOR === */
-.topbar {
-  background: #0a2342;
-  color: white;
-  border-radius: 8px;
-  padding: 12px 25px;
+/* === NAVBAR === */
+.navbar {
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 12px 0;
+  position: fixed;
+  top: 0;
   width: 100%;
-  max-width: 1000px;
+  z-index: 1000;
+}
+
+.navbar-content {
+  width: 85%;
+  max-width: 1100px;
+  margin: auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
-.topbar-left h2 {
-  font-size: 1.3rem;
-  font-weight: 600;
-  margin: 0;
-}
-
-.topbar-right {
+.navbar-left {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.user-logo {
-  width: 36px;
-  height: 36px;
+.navbar-logo {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid white;
 }
 
-/* === TÍTULO PRINCIPAL === */
-.page-title {
-  font-size: 1.8rem;
+.navbar-title {
+  font-size: 1.4rem;
+  color: #002b5c;
+  font-weight: 700;
+}
+
+.btn-login {
+  background: #002b5c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 15px;
   font-weight: 600;
-  color: #0066ff;
-  margin-bottom: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-login:hover {
+  background: #004080;
+  transform: scale(1.03);
 }
 
-/* === TARJETAS === */
-.card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 25px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  width: 100%;
-  max-width: 1000px;
-  transition: 0.2s ease;
+/* === MAIN SECTION === */
+.main {
+  padding-top: 110px;
+  min-height: 100vh;
+  text-align: center;
 }
 
-.card:hover {
-  transform: translateY(-3px);
+.section-title {
+  color: #002b5c;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.section-subtitle {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
 }
 
 /* === FORMULARIO === */
-.form-card h3 {
-  color: #0066ff;
-  margin-bottom: 15px;
-  font-weight: 600;
+.card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  width: 90%;
+  max-width: 1100px; /* ⬅️ aumentamos ancho para que quepan 4 columnas */
+  margin: 0 auto 30px auto;
   text-align: left;
+  transition: all 0.3s ease-in-out;
 }
 
+.card:hover {
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulario principal */
+.shipment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* === Distribución en 4 columnas (ajuste visual) === */
+.form-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 15px;
+}
+
+/* === Distribución en 2 columnas (secciones pequeñas) === */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 18px;
 }
 
-input, select {
-  width: 100%;
-  padding: 10px;
-  border: 1.5px solid #e0e0e0;
-  border-radius: 8px;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  font-size: 0.95rem;
+/* === Campos === */
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
 
-input:focus, select:focus {
-  border-color: #0066ff;
-  box-shadow: 0 0 5px rgba(0, 102, 255, 0.3);
+.form-group label {
+  font-weight: 600;
+  color: #002b5c;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  border: 1.3px solid #ddd;
+  border-radius: 6px;
+  padding: 9px;
+  font-size: 0.9rem;
   outline: none;
+  transition: all 0.3s;
+  background-color: #fafafa;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #0058e0;
+  background-color: #fff;
+  box-shadow: 0 0 4px rgba(0, 88, 224, 0.25);
+}
+
+/* Campo ancho completo */
+.full-width {
+  grid-column: span 2;
 }
 
 /* === BOTONES === */
-.button-group {
+.form-actions {
+  text-align: center;
+}
+
+.btn-primary {
+  background: #002b5c;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+.btn-primary:hover {
+  background: #004080;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-weight: 600;
+  margin-top: 8px;
+  transition: all 0.3s;
+}
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+/* === QR VIEW === */
+.qr-view {
+  text-align: center;
+}
+
+.qr-code {
+  color: #0058e0;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+.details {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+/* === FOOTER === */
+.footer {
+  background: #002b5c;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 0.85rem;
+  margin-top: 30px;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 1024px) {
+  .form-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .form-grid-4,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .full-width {
+    grid-column: span 1;
+  }
+  .card {
+    padding: 20px;
+  }
+}
+
+/* === Ajuste visual del QR === */
+.qr-view {
+  text-align: center;
+}
+
+.qr-container {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  background-color: #fafafa;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#qr-img {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 5px;
+  background: white;
+}
+/* === QR VISTA ORDENADA === */
+.qr-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.qr-box {
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.shipment-info {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.shipment-details {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  margin-top: 10px;
+}
+
+.detail-column {
+  text-align: left;
+}
+
+.recipient-info {
+  display: inline-block;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.btn-actions {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
 }
-
-.button-group button {
-  font-weight: 600;
-  font-size: 0.95rem;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  width: 30%;
-}
-
-.btn-primary {
-  background: #0066ff;
-  color: white;
-}
-.btn-primary:hover { background: #004fc6; }
-
-.btn-secondary {
-  background: #00b8d9;
-  color: white;
-}
-.btn-secondary:hover { background: #009bb3; }
-
-.btn-cancel {
-  background: #6c757d;
-  color: white;
-}
-.btn-cancel:hover { background: #5a6268; }
-
-/* === QR CODE === */
-.qr-card {
-  text-align: center;
-  background: #f8f9fa;
-  max-width: 400px;
-  margin: 0 auto;
-}
-.qr-card qrcode {
-  display: block;
-  margin: 10px auto;
-}
-.qr-title {
-  color: #0066ff;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-/* === TABLA === */
-.table-card h3 {
-  color: #0066ff;
-  font-weight: 600;
-  text-align: left;
-  margin-bottom: 10px;
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-
-.filters label {
-  font-weight: 500;
-  color: #555;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.95rem;
-}
-
-th {
-  background: #0066ff;
-  color: white;
-  text-align: center;
-  padding: 10px;
-}
-td {
-  text-align: center;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
-}
-tr:hover { background: #f6f9ff; }
-
-/* === ESTADOS === */
-.status {
-  padding: 5px 10px;
-  border-radius: 20px;
-  color: #000;
-  font-weight: 600;
-  font-size: 0.85rem;
-}
-.recibido { background: #ffc107; }
-.en-transito { background: #007bff; color: #fff; }
-.entregado { background: #28a745; color: #fff; }
-.cerrado { background: #6c757d; color: #fff; }
-
-/* === LOADER === */
-.loader-overlay {
-  position: absolute;
-  top: 0; left: 0;
-  right: 0; bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-}
-.spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #0066ff;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  animation: spin 0.8s linear infinite;
-}
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 992px) {
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .button-group button {
-    width: 100%;
-  }
-
-  .filters {
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-

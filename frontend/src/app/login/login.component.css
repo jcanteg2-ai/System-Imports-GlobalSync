@@ -1,116 +1,282 @@
-.container {
+/* === CONTENEDOR PRINCIPAL === */
+.auth-container {
   position: relative;
-  width: 750px;
-  max-width: 100%;
-  height: 480px;
-  margin: 60px auto;
-  border-radius: 20px;
-  background-color: #fff;
+  width: 950px;
+  min-height: 560px;
+  margin: 80px auto;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
   display: flex;
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  transition: all 0.8s ease;
+  transition: all 0.6s ease;
 }
 
-.container-form {
+/* === FORMULARIOS === */
+.auth-card {
+  flex: 1;
   width: 50%;
-  padding: 40px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.8s ease;
+  padding: 40px;
+}
+
+/* Formulario de inicio y registro */
+.sign-in-form,
+.sign-up-form {
+  position: absolute;
+  width: 60%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.8s ease;
+  z-index: 1;
+}
+
+/* Registro oculto por defecto */
+.sign-up-form {
+  transform: translateX(100%);
+}
+
+/* Mostrar/ocultar al hacer toggle */
+.auth-container.toggle .sign-in-form {
+  transform: translateX(-100%);
+}
+.auth-container.toggle .sign-up-form {
+  transform: translateX(0);
+}
+
+/* === PANEL AZUL DE BIENVENIDA (CORREGIDO) === */
+.auth-panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 40%;
+  height: 100%;
+  background: var(--primary-color);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: all 0.8s ease;
+  z-index: 1; /* 🔹 debajo del formulario visible */
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.auth-container.toggle .auth-panel {
+  transform: translateX(-10%); /* 🔹 antes estaba -150%, demasiado */
+}
+
+/* === CONTENIDO INTERNO DEL PANEL === */
+.panel-content {
+  width: 80%;
+  max-width: 300px;
+  padding: 20px;
+  animation: fadeIn 1s ease;
+}
+
+.panel-content h3 {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.panel-content p {
+  font-size: 1rem;
+  color: #e2e2e2;
+  margin-bottom: 25px;
+  line-height: 1.4;
+}
+
+/* Botón del panel */
+.btn-secondary {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  background: white;
+  color: var(--primary-color);
+}
+
+/* === ANIMACIÓN SUAVE === */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* === CABECERA DE LOS FORMULARIOS === */
+.auth-header {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  transition: all 0.8s ease;
-  opacity: 1;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 25px;
 }
 
-.container-form.register {
-  transform: translateX(100%);
-  opacity: 0;
-}
-
-.container.toggle .container-form.login {
-  transform: translateX(-100%);
-  opacity: 0;
-}
-
-.container.toggle .container-form.register {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 15px auto;
+.auth-logo {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
   border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  object-fit: cover;
+  margin-bottom: 12px;
+  animation: fadeZoom 1s ease; /* ✨ animación de entrada */
 }
 
-h2 {
-  text-align: center;
-  color: #003366;
-  margin-bottom: 5px;
+@keyframes fadeZoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-span {
-  display: block;
-  text-align: center;
+.auth-header h2 {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.auth-header p {
   color: #555;
-  font-size: 14px;
-  margin-bottom: 15px;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
 }
 
-.container-input {
-  margin-bottom: 15px;
-}
-
-input {
-  width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
+/* === CAMPOS DE ENTRADA === */
+.auth-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #f4f7fa;
+  border: 1.5px solid #ddd;
   border-radius: 8px;
-  outline: none;
-  font-size: 14px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  transition: border-color 0.3s;
 }
 
-button[type="submit"] {
-  width: 100%;
-  background: #003366;
+.auth-field:focus-within {
+  border-color: var(--secondary-color);
+}
+
+.auth-field input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+/* === BOTONES === */
+.btn-primary {
+  background: var(--primary-color);
   color: white;
   border: none;
+  border-radius: 8px;
   padding: 10px;
-  border-radius: 8px;
+  width: 100%;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: 500;
+  transition: 0.3s;
+  margin-top: 5px;
 }
 
-button[type="submit"]:hover {
-  background: #0055aa;
+.btn-primary:hover {
+  background: var(--secondary-color);
+  transform: scale(1.03);
 }
 
-a {
-  text-align: center;
-  display: block;
-  margin-top: 10px;
-  color: #0055aa;
-  text-decoration: none;
-}
-
-.switch {
-  text-align: center;
-  margin-top: 25px;
-}
-
-#btn {
-  background-color: #444;
-  color: #fff;
-  padding: 10px 30px;
+.btn-secondary {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
   border-radius: 8px;
-  border: none;
+  padding: 10px 18px;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
 }
 
-#btn:hover {
-  background-color: #222;
+.btn-secondary:hover {
+  background: white;
+  color: var(--primary-color);
+}
+
+/* === ENLACES Y TEXTOS === */
+.forgot-link {
+  display: block;
+  margin-top: 8px;
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+.switch-text {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.switch-text a {
+  color: var(--secondary-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.switch-text a:hover {
+  text-decoration: underline;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 1024px) {
+  .auth-container {
+    width: 90%;
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sign-in-form,
+  .sign-up-form,
+  .auth-panel {
+    position: relative;
+    width: 100%;
+    height: auto;
+    transform: none !important;
+  }
+
+  .auth-panel {
+    padding: 30px 0;
+  }
+
+  .btn-primary {
+    width: 90%;
+  }
 }
